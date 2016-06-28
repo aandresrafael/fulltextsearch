@@ -1,5 +1,8 @@
 <h3>Write or paste the document content</h3>
 
+<% if flash[:notice].present? %>
+  <div class="alert alert-info" role="alert"><%= flash[:notice] %></div>
+<% end %>
 
 <%= form_for(@document, class: 'navbar-form') do |f| %>
   <div class="form-group"><%= f.text_area :content, class: 'form-control', rows: 4 %></div>

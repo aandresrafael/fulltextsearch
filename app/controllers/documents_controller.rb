@@ -6,18 +6,24 @@ class DocumentsController < ApplicationController
   end
 
   def create
-  	@document = Document.new(content: params[:document][:content])
-  	if @document.save
-  	  flash[:notice] = "Document was created successfully."
-  	else
-  	 flash[:error] = "There was an error."
-  	end
+    if params[:document] && params[:document][:content].present?
+      @document = Document.new(content: params[:document][:content])
+      if @document.save
+        message = "Document was created successfully."
+      else
+        message = "There was an error."
+      end
+    else
+      message = "Document content is empty"
+    end
+
+    flash[:notice] = message
   	redirect_to documents_path
   end
 
   def search
     @tokens = Parser.parse_text(params[:query])
-    @documents =  Document.search(params[:query])
+    @documents = Document.search(params[:query])
     render :index
   end
 

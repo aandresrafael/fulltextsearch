@@ -13,3 +13,11 @@ test:
   pool: 5
   username: postgres
   password: aandres1983
+
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: fulltextsearch
+  pool: 5
+  username: postgres
+  password:
