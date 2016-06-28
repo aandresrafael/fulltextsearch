@@ -1,0 +1,32 @@
+<h3>Write or paste the document content</h3>
+
+
+<%= form_for(@document, class: 'navbar-form') do |f| %>
+  <div class="form-group"><%= f.text_area :content, class: 'form-control', rows: 4 %></div>
+  <%= submit_tag 'Submit', class: 'btn btn-default' %>
+<% end %>
+
+<br/>
+<%= form_tag(search_documents_path, class: "navbar-form navbar-right", role: "search") do %>
+  <%= text_field_tag :query, '', class: 'form-control' %>
+  <%= submit_tag 'Search', class: 'btn btn-default' %>
+<% end %>
+<%= hidden_field_tag 'tokens', @tokens.join(','), id: 'tokens' if @tokens.present? %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+  	Documents
+  </div>
+
+  <!-- Table -->
+  <table class="table">
+    <thead>
+      <tr>
+        <td>Id</td>
+        <td>Content<td/>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: 'document', collection: @documents %>
+    </tbody>
+  </table>
+</div>
